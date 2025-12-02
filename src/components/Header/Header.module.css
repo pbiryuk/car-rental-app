@@ -1,0 +1,28 @@
+/* src/components/Header/Header.module.css */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 100px; /* Приблизно відповідає макету */
+  border-bottom: 1px solid #e0e0e0; /* Легка лінія знизу */
+  background-color: #ffffff; /* Білий фон */
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #3470ff; /* Primary Blue */
+}
+
+.nav a {
+  margin-left: 20px;
+  font-size: 16px;
+  color: #101828; /* Dark Blue */
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav a:hover {
+  color: #3470ff; /* Primary Blue */
+}

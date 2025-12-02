@@ -1,0 +1,52 @@
+/* src/components/CarBookingForm/CarBookingForm.module.css */
+
+.formTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #121417;
+  margin-bottom: 8px;
+}
+
+.formSubtitle {
+  font-size: 16px;
+  color: #8a8a89;
+  margin-bottom: 24px;
+}
+
+.inputGroup {
+  margin-bottom: 16px;
+}
+
+.inputGroup input,
+.inputGroup textarea {
+  width: 100%;
+  padding: 12px 18px;
+  border: 1px solid rgba(138, 138, 137, 0.2);
+  border-radius: 12px;
+  font-size: 16px;
+  color: #121417;
+  background-color: #ffffff;
+}
+
+.inputGroup input::placeholder,
+.inputGroup textarea::placeholder {
+  color: #8a8a89;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #3470ff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 10px;
+}
+
+.submitButton:hover {
+  background-color: #0b44cd;
+}

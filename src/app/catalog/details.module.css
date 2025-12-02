@@ -1,0 +1,94 @@
+/* src/app/catalog/details.module.css */
+
+.detailsContainer {
+  max-width: 1280px;
+  margin: 40px auto;
+  padding: 0 15px;
+}
+
+.contentWrapper {
+  display: flex;
+  gap: 24px;
+  background-color: #ffffff;
+  border-radius: 14px;
+}
+
+.mainContent {
+  width: 65%; /* Приблизно 2/3 */
+  padding-right: 24px;
+}
+
+.formWrapper {
+  width: 35%; /* Приблизно 1/3 */
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 14px;
+  border: 1px solid #e5e5e5;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  margin-bottom: 24px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #121417;
+}
+
+.textSmall {
+  font-size: 12px;
+  color: #8a8a89;
+  margin-bottom: 14px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 600;
+  color: #3470ff;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #121417;
+  margin-bottom: 24px;
+}
+
+.conditions,
+.specs,
+.accessories {
+  margin-bottom: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 500;
+  color: #121417;
+  margin-bottom: 12px;
+}
+
+.detailsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+}
+
+.detailTag {
+  font-size: 12px;
+  color: #3470ff;
+  background-color: #f9f9f9;
+  padding: 7px 14px;
+  border-radius: 35px;
+}

@@ -1,0 +1,115 @@
+/* src/components/CarCard/CarCard.module.css */
+
+.card {
+  position: relative;
+  width: 274px; /* Ширина картки з макета */
+  height: 426px; /* Загальна висота картки */
+  background-color: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.imageWrapper {
+  position: relative;
+  height: 268px; /* Висота зображення */
+  width: 100%;
+  margin-bottom: 14px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* Інформаційний блок */
+.info {
+  padding: 0 9px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.titleLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #121417;
+  /* Обрізка назви, якщо вона занадто довга */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70%;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 500;
+  color: #121417;
+}
+
+.details {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: #8a8a89;
+  margin-bottom: 28px;
+  /* Використовуємо прозорий роздільник */
+}
+
+.detailItem {
+  padding-right: 6px;
+  border-right: 1px solid rgba(18, 20, 23, 0.1);
+  margin-right: 6px;
+  line-height: 1.5;
+}
+
+.detailItem:last-child {
+  border-right: none;
+  margin-right: 0;
+}
+
+/* Кнопка "Read more" */
+.readMoreButton {
+  width: 100%;
+  height: 44px;
+  background-color: #3470ff;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: auto; /* Притискає кнопку до низу */
+}
+
+.readMoreButton:hover {
+  background-color: #0b44cd;
+}
+
+/* Кнопка обраного (Серце) */
+.favoriteButton {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.favoriteButton.isFavorite {
+  color: #3470ff; /* Синій для обраного */
+}
+
+.favoriteButton.notFavorite {
+  color: #ffffff; /* Білий для неопрацьованого */
+  opacity: 0.8;
+}

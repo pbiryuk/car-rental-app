@@ -1,66 +1,42 @@
+// src/app/page.tsx
+import Link from "next/link";
 import Image from "next/image";
-import styles from "./page.module.css";
+import styles from "./home.module.css"; // Імпорт стилів
 
-export default function Home() {
+const HomePage = () => {
+  // ✅ ВИПРАВЛЕНО: Використовуємо кореневий шлях до статичного зображення у папці public
+  const imageUrl = "/images/banner.jpg";
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
+    <div className={styles.heroSection}>
+      {/* Зображення з затемненням */}
+      <div className={styles.imageWrapper}>
         <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+          src={imageUrl}
+          alt="Find your perfect rental car"
+          fill
+          sizes="100vw"
+          style={{ objectFit: "cover" }}
+          priority // Використовуємо priority для зображення банера
         />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+        <div className={styles.overlay}></div>
+      </div>
+
+      {/* Контент (заголовок, опис, кнопка) */}
+      <div className={styles.content}>
+        <h1 className={styles.title}>Find your perfect rental car</h1>
+
+        <p className={styles.subtitle}>
+          Reliable and budget-friendly rentals for any journey
+        </p>
+
+        {/* Кнопка "View Catalog" */}
+        <Link href="/catalog" passHref>
+          <button className={styles.catalogButton}>View Catalog</button>
+        </Link>
+      </div>
     </div>
   );
-}
+};
+
+export default HomePage;

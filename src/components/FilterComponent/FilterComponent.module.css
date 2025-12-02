@@ -1,0 +1,81 @@
+/* src/components/FilterComponent/FilterComponent.module.css */
+
+.filterForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px; /* Відстань між групами фільтрів */
+  justify-content: center;
+  align-items: flex-end; /* Вирівнювання по кнопці Search */
+  padding: 20px 0;
+  margin-bottom: 50px; /* Відступ перед картками */
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #8a8a89; /* Сірий, схожий на #8E929A */
+  margin-bottom: 8px;
+}
+
+/* Стилізація SELECT та INPUT */
+.selectInput {
+  height: 48px;
+  min-width: 150px;
+  padding: 14px 18px;
+  border: none;
+  background-color: #f7f7f7; /* Світло-сірий */
+  border-radius: 14px; /* Заокругленість */
+  font-size: 18px;
+  color: #121417; /* Темний текст */
+  appearance: none; /* Приховуємо стандартну стрілку */
+  cursor: pointer;
+}
+
+/* Група пробігу (From/To) */
+.mileageGroup {
+  display: flex;
+}
+
+.mileageGroup input {
+  height: 48px;
+  width: 160px; /* Ширина інпутів пробігу */
+  padding: 14px 18px;
+  border: none;
+  background-color: #f7f7f7;
+  font-size: 18px;
+  color: #121417;
+}
+
+.mileageGroup input:first-child {
+  border-top-left-radius: 14px;
+  border-bottom-left-radius: 14px;
+  border-right: 1px solid rgba(138, 138, 137, 0.2); /* Роздільник */
+}
+
+.mileageGroup input:last-child {
+  border-top-right-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+
+/* Кнопка Search */
+.searchButton {
+  height: 48px;
+  padding: 0 44px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #3470ff; /* Primary Blue */
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.searchButton:hover {
+  background-color: #0b44cd; /* Hover Blue */
+}

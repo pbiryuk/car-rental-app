@@ -1,0 +1,36 @@
+/* src/app/catalog/catalog.module.css */
+
+.catalogPage {
+  padding: 50px 0;
+}
+
+.catalogGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 колонки, як у макеті */
+  gap: 29px; /* Відступ між картками */
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 0 15px;
+}
+
+/* Кнопка Load More */
+.loadMoreWrapper {
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 150px;
+}
+
+.loadMoreButton {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: #3470ff;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.loadMoreButton:hover {
+  color: #0b44cd;
+}

@@ -1,42 +1,25 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* src/app/globals.css */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
+/* Базові стилі та шрифти */
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff; /* Основний фон сторінки */
+  color: #101828;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Скидання стилів для Next.js Image */
+.relative {
+  position: relative;
+}
+.h-48 {
+  height: 192px; /* 48 * 4px = 192px */
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+/* Контейнер */
+.container {
+  max-width: 1280px; /* Приблизна ширина макета */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
 }
