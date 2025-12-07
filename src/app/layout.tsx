@@ -1,4 +1,4 @@
-// src/app/layout.tsx (Фрагмент)
+import "./globals.css";
 import Header from "../components/Header/Header";
 
 export default function RootLayout({
@@ -9,7 +9,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header /> {/* 👈 ДОДАЄМО HEADER */}
+        <Header />
         <main>{children}</main>
       </body>
     </html>

@@ -1,25 +1,28 @@
-/* src/app/globals.css */
-
-/* Базові стилі та шрифти */
-body {
+/* body {
   font-family: Arial, sans-serif;
-  background-color: #ffffff; /* Основний фон сторінки */
+  background-color: #ffffff; 
   color: #101828;
 }
 
-/* Скидання стилів для Next.js Image */
 .relative {
   position: relative;
 }
 .h-48 {
-  height: 192px; /* 48 * 4px = 192px */
+  height: 192px; 
 }
 
-/* Контейнер */
+
 .container {
-  max-width: 1280px; /* Приблизна ширина макета */
+  max-width: 1280px; 
   margin-left: auto;
   margin-right: auto;
   padding-left: 15px;
   padding-right: 15px;
+} */
+/* глобально обнуляємо верхні і нижні відступи для h1 та p */
+/* Скидання дефолтних стилів для всього сайту */
+html,
+body {
+  margin: 0;
+  padding: 0;
 }

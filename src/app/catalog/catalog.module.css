@@ -34,3 +34,24 @@
 .loadMoreButton:hover {
   color: #0b44cd;
 }
+
+.catalogTitle {
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.noCars {
+  grid-column: 1 / -1; /* Розтягнути на всю ширину сітки */
+  text-align: center;
+  font-size: 18px;
+  color: #8a8a89;
+  margin: 20px 0;
+}
