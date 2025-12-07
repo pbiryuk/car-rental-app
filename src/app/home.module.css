@@ -12,10 +12,19 @@
   position: relative;
 
   background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url("/images/banner.jpg");
+    url("/images/main-bg.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+
+@media only screen and (min-resolution: 2dppx),
+  only screen and (-webkit-min-device-pixel-ratio: 2) {
+  .heroSection {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+      url("/images/main-bg@2x.jpg");
+    background-size: cover;
+  }
 }
 
 .content {
@@ -28,7 +37,6 @@
 
 .title {
   color: #ffffff;
-  font-family: Manrope, sans-serif;
   font-size: 60px;
   font-weight: 700;
   line-height: 1.2;
@@ -41,7 +49,6 @@
 }
 
 .subtitle {
-  font-family: Manrope, sans-serif;
   font-weight: 600;
   font-size: 24px;
   line-height: 1.333;
