@@ -1,70 +1,215 @@
+/* Контейнер сторінки */
 .container {
-  padding: 40px;
+  padding: 104px 120px;
   max-width: 1200px;
   margin: 0 auto;
 }
-.title {
-  font-size: 36px;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 40px;
+
+/* Хедер */
+.header {
+  display: flex;
+  flex-direction: column; /* щоб рядки були вертикально */
+  margin-bottom: 68px;
 }
+
+.titleWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px; /* саме це формує відстань між заголовком та ID */
+  width: fit-content; /* не даємо блоку розтягуватися */
+}
+
+.title {
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1.333;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #101828;
+  margin: 0 0 8px 0;
+}
+
+.carId {
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: 0em;
+  color: #6c717b;
+}
+
+/* Локація та мильяж під заголовком */
+.locationMileage {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.location,
+.mileage {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* відстань між іконкою та текстом */
+  font-family: Manrope;
+  font-weight: 500;
+  font-size: 16px;
+  color: #101828;
+}
+
+.icon {
+  display: inline-block;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: Manrope;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6c717b;
+}
+.price {
+  color: rgba(52, 112, 255, 1);
+  font-family: Manrope, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.333;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-bottom: 32px;
+}
+
+.descriptionLine {
+  font-family: Manrope, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.333;
+  letter-spacing: 0em;
+  color: #101828;
+  margin: 0;
+}
+
+/* Контент сторінки */
 .content {
   display: flex;
-  gap: 40px;
-  flex-wrap: wrap;
+  gap: 72px;
 }
+
+/* Ліва колонка: фото, опис, форма бронювання */
 .leftColumn {
-  flex: 2;
+  width: 640px;
+  display: flex;
+  flex-direction: column;
+  margin-top: -20px;
 }
-.rightColumn {
-  flex: 1;
-  background-color: #f7f7f7;
-  padding: 24px;
-  border-radius: 12px;
-}
+
 .imageWrapper {
   position: relative;
   width: 100%;
-  height: 400px;
-  margin-bottom: 20px;
-  border-radius: 12px;
+  height: 512px;
+  border-radius: 18.74px;
   overflow: hidden;
+  margin-bottom: 40px;
 }
+
 .description {
-  color: #555;
-  line-height: 1.6;
+  font-size: 16px;
+  color: #333333;
   margin-bottom: 24px;
+  line-height: 1.6;
 }
-.characteristics h2,
-.conditions h2 {
-  font-size: 24px;
-  margin-bottom: 12px;
+
+.bookingBlockWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px;
+  box-sizing: border-box;
+  border: 1px solid rgba(218, 221, 225, 1);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 1);
 }
-.characteristics ul {
+
+/* Права колонка: умови та деталі */
+.rightColumn {
+  width: calc(100% - 72px - 640px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Секції */
+.sectionTitle {
+  font-family: Manrope, sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: 0em;
+  color: #101828;
+  margin: 0 0 20px 0;
+}
+
+.conditionsList {
+  list-style: none; /* прибираємо стандартні буліти */
+  padding: 0;
+  margin: 0;
+}
+
+.conditionsList li {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* відстань між іконкою і текстом */
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  font-style: medium;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: #101828;
+  margin-bottom: 16px;
+}
+
+.conditionsList li svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+.specificationsList {
   list-style: none;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 8px;
+  margin: 0;
 }
-.conditions .tags {
+
+.specificationsList li {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  align-items: center;
+  gap: 8px; /* відстань між SVG і текстом */
+  font-family: Manrope;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #101828;
+  margin-bottom: 16px;
 }
-.tag {
-  background-color: #dbeafe;
-  color: #1e40af;
-  padding: 4px 12px;
-  border-radius: 9999px;
-  font-size: 14px;
+.conditionsList li:last-child,
+.specificationsList li:last-child,
+.accessoriesList li:last-child {
+  margin-bottom: 0;
 }
-.rentalPrice {
-  font-size: 20px;
-  font-weight: bold;
-  margin-top: 16px;
+.section {
+  /* відстань від попереднього контенту всередині правої колонки */
+  display: flex;
+  flex-direction: column;
 }
-.rentalPrice span {
-  color: #16a34a;
+
+/* Встановлюємо потрібний відступ між секціями */
+.section:not(:last-child) {
+  margin-bottom: 110px;
 }

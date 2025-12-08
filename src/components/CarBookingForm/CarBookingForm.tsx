@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import styles from "./CarBookingForm.module.css";
 
 interface CarBookingFormProps {
@@ -16,17 +18,25 @@ const CarBookingForm: React.FC<CarBookingFormProps> = ({
 }) => {
   const [formData, setFormData] = useState({
     name: "",
-    phone: "",
     email: "",
-    rentalDate: "",
+    comment: "",
   });
+
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
+    null,
+    null,
+  ]);
+  const [startDate, endDate] = dateRange;
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [notification, setNotification] = useState<{
     message: string;
     type: "success" | "error";
   } | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -36,9 +46,9 @@ const CarBookingForm: React.FC<CarBookingFormProps> = ({
     setIsSubmitting(true);
     setNotification(null);
 
-    if (!formData.name || !formData.phone || !formData.rentalDate) {
+    if (!formData.name || !formData.email || !startDate || !endDate) {
       setNotification({
-        message: "Будь ласка, заповніть всі обов'язкові поля.",
+        message: "Please fill out all required fields.",
         type: "error",
       });
       setIsSubmitting(false);
@@ -48,10 +58,11 @@ const CarBookingForm: React.FC<CarBookingFormProps> = ({
     setTimeout(() => {
       setIsSubmitting(false);
       setNotification({
-        message: `Бронювання ${carName} успішно підтверджено! Ми зв'яземося з Вами найближчим часом.`,
+        message: `Your booking request for ${carName} (Price: ${rentalPrice}, Min Age: ${minAge}) has been sent! We will contact you soon.`,
         type: "success",
       });
-      setFormData({ name: "", phone: "", email: "", rentalDate: "" });
+      setFormData({ name: "", email: "", comment: "" });
+      setDateRange([null, null]);
     }, 1500);
   };
 
@@ -63,61 +74,61 @@ const CarBookingForm: React.FC<CarBookingFormProps> = ({
             notification.type === "success" ? styles.success : styles.error
           }`}
         >
-          <p className={styles.notificationTitle}>
-            {notification.type === "success" ? "Успіх!" : "Помилка!"}
-          </p>
           <p>{notification.message}</p>
         </div>
       )}
 
-      <p>
-        Мінімальний вік для оренди: <strong>{minAge}</strong>
+      <h3 className={styles.formTitle}>Book your car now</h3>
+      <p className={styles.formSubtitle}>
+        Stay connected! We are always ready to help you.
       </p>
 
       <div className={styles.inputGroup}>
-        <label htmlFor="name">Ваше Ім&apos;я *</label>
         <input
           type="text"
           name="name"
-          id="name"
           value={formData.name}
           onChange={handleChange}
+          placeholder="Name*"
           disabled={isSubmitting}
         />
       </div>
 
       <div className={styles.inputGroup}>
-        <label htmlFor="phone">Телефон *</label>
-        <input
-          type="tel"
-          name="phone"
-          id="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          disabled={isSubmitting}
-        />
-      </div>
-
-      <div className={styles.inputGroup}>
-        <label htmlFor="email">Email</label>
         <input
           type="email"
           name="email"
-          id="email"
           value={formData.email}
           onChange={handleChange}
+          placeholder="Email*"
           disabled={isSubmitting}
         />
       </div>
 
       <div className={styles.inputGroup}>
-        <label htmlFor="rentalDate">Дата Оренди *</label>
-        <input
-          type="date"
-          name="rentalDate"
-          id="rentalDate"
-          value={formData.rentalDate}
+        <DatePicker
+          selectsRange
+          startDate={startDate}
+          endDate={endDate}
+          onChange={(update: [Date | null, Date | null]) =>
+            setDateRange(update)
+          }
+          placeholderText="Booking date"
+          disabled={isSubmitting}
+          className={styles.datepickerInput}
+          popperPlacement="bottom-end"
+          popperClassName="custom-datepicker-popper"
+          wrapperClassName={styles.datePickerWrapper} // для ширини input
+        />
+      </div>
+
+      <div className={`${styles.inputGroup} ${styles.lastInputGroup}`}>
+        <textarea
+          name="comment"
+          rows={3}
+          value={formData.comment}
           onChange={handleChange}
+          placeholder="Comment"
           disabled={isSubmitting}
         />
       </div>
@@ -127,7 +138,7 @@ const CarBookingForm: React.FC<CarBookingFormProps> = ({
         className={styles.submitButton}
         disabled={isSubmitting}
       >
-        {isSubmitting ? "Обробка..." : `Забронювати за ${rentalPrice}$/год`}
+        {isSubmitting ? "Sending..." : "Send"}
       </button>
     </form>
   );

@@ -1,52 +1,91 @@
-/* src/components/CarBookingForm/CarBookingForm.module.css */
-
 .formTitle {
-  font-size: 20px;
+  font-family: "Manrope", sans-serif;
   font-weight: 600;
-  color: #121417;
-  margin-bottom: 8px;
+  font-size: 20px;
+  line-height: 1.2;
+  color: #101828;
+  margin: 0 0 8px 0;
 }
 
 .formSubtitle {
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
   font-size: 16px;
-  color: #8a8a89;
-  margin-bottom: 24px;
+  line-height: 1.25;
+  color: #8d929a;
+  margin: 0 0 24px 0;
 }
 
 .inputGroup {
   margin-bottom: 16px;
+  width: 100%;
+}
+
+.datePickerWrapper {
+  width: 100%; /* робимо ширину інпута 100% */
 }
 
 .inputGroup input,
-.inputGroup textarea {
+.inputGroup textarea,
+.datepickerInput {
   width: 100%;
-  padding: 12px 18px;
-  border: 1px solid rgba(138, 138, 137, 0.2);
-  border-radius: 12px;
+  padding: 14px 20px;
+  box-sizing: border-box;
+  background: #f7f7f7;
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
   font-size: 16px;
-  color: #121417;
-  background-color: #ffffff;
+  line-height: 1.25;
+  color: #8a8a89;
+  border: none;
+  border-radius: 12px;
+  resize: none;
 }
 
 .inputGroup input::placeholder,
-.inputGroup textarea::placeholder {
+.inputGroup textarea::placeholder,
+.datepickerInput::placeholder {
   color: #8a8a89;
 }
 
-.submitButton {
-  width: 100%;
-  padding: 12px 0;
-  font-size: 18px;
-  font-weight: 600;
-  color: #ffffff;
-  background-color: #3470ff;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  margin-top: 10px;
+.lastInputGroup {
+  margin-bottom: 0;
 }
 
-.submitButton:hover {
+.submitButton {
+  width: 156px;
+  display: block;
+  padding: 12px 0;
+  border-radius: 12px;
+  background: #3470ff;
+  color: #fff;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin: 24px auto 0 auto;
+}
+
+.submitButton:hover,
+.submitButton:focus {
   background-color: #0b44cd;
+}
+
+/* Notification */
+.notification {
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.success {
+  background-color: #d1fae5;
+  color: #16a34a;
+}
+
+.error {
+  background-color: #fee2e2;
+  color: #dc2626;
 }

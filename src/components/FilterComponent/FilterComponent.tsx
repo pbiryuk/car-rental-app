@@ -82,8 +82,10 @@ const FilterComponent: React.FC = () => {
     fetchBrandsList();
   }, [fetchBrandsList]);
 
-  const formatMileage = (label: string, value?: number) =>
-    value ? `${label} ${value.toLocaleString()}` : label;
+  const formatMileage = (label: string, value?: number | null) =>
+    value !== null && value !== undefined
+      ? `${label} ${value.toLocaleString("en-US")}`
+      : label;
 
   const handleMileageChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -91,7 +93,7 @@ const FilterComponent: React.FC = () => {
     label: string
   ) => {
     let raw = e.target.value.replace(new RegExp(label, "i"), "").trim();
-    raw = raw.replace(/,/g, "");
+    raw = raw.replace(/,/g, "").replace(/\s+/g, "");
     const num = raw === "" ? null : Number(raw);
     if (isNaN(num as number)) return;
 
@@ -132,7 +134,7 @@ const FilterComponent: React.FC = () => {
             options={Array.from({ length: 50 }, (_, i) =>
               ((i + 3) * 10).toString()
             )}
-            value={localFilters.price ? String(localFilters.price) : null}
+            value={localFilters.price ? `To $${localFilters.price}` : null}
             onChange={(val) =>
               setLocalFilters((prev) => ({ ...prev, price: Number(val) }))
             }
@@ -148,13 +150,21 @@ const FilterComponent: React.FC = () => {
           <input
             type="text"
             name="mileageFrom"
-            value={formatMileage("From", localFilters.mileageFrom ?? undefined)}
+            autoComplete="off"
+            value={`${formatMileage(
+              "From",
+              localFilters.mileageFrom ?? undefined
+            )}`}
             onChange={(e) => handleMileageChange(e, "mileageFrom", "From")}
           />
           <input
             type="text"
             name="mileageTo"
-            value={formatMileage("To", localFilters.mileageTo ?? undefined)}
+            autoComplete="off"
+            value={`${formatMileage(
+              "To",
+              localFilters.mileageTo ?? undefined
+            )}`}
             onChange={(e) => handleMileageChange(e, "mileageTo", "To")}
           />
         </div>
