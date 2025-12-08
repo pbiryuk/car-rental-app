@@ -1,4 +1,3 @@
-// src/app/catalog/page.tsx
 "use client";
 
 import React, { useEffect } from "react";
@@ -6,8 +5,6 @@ import { useCarStore } from "@/store/carStore";
 import CarCard from "../../components/CarCard/CarCard";
 import FilterComponent from "../../components/FilterComponent/FilterComponent";
 import Loader from "../../components/Loader/Loader";
-
-// 👈 Підключаємо CSS Module
 import styles from "./catalog.module.css";
 
 const CatalogPage: React.FC = () => {
@@ -26,24 +23,28 @@ const CatalogPage: React.FC = () => {
 
   return (
     <div className={styles.catalogPage}>
-      <h1 className={styles.catalogTitle}>Каталог Автомобілів</h1>
-
-      <FilterComponent />
+      <div className={styles.filterWrapper}>
+        <FilterComponent />
+      </div>
 
       {error && <p className={styles.error}>{error}</p>}
 
-      <ul className={styles.catalogGrid}>
-        {cars.length === 0 && !isLoading && !error ? (
-          <p className={styles.noCars}>
+      <ul
+        className={`${styles.catalogGrid} ${
+          cars.length > 0 && cars.length < 4 ? styles.centerGrid : ""
+        }`}
+      >
+        {!isLoading && !error && cars.length === 0 && (
+          <li className={styles.noCars}>
             На жаль, за обраними критеріями автомобілі не знайдено.
-          </p>
-        ) : (
-          cars.map((car) => (
-            <li key={car.id}>
-              <CarCard car={car} />
-            </li>
-          ))
+          </li>
         )}
+
+        {cars.map((car) => (
+          <li key={car.id}>
+            <CarCard car={car} />
+          </li>
+        ))}
       </ul>
 
       {isLoading && <Loader />}

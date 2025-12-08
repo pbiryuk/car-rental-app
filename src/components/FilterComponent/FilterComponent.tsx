@@ -1,8 +1,77 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useCarStore } from "@/store/carStore";
 import styles from "./FilterComponent.module.css";
+
+interface CustomSelectProps {
+  options: string[];
+  value: string | null;
+  onChange: (val: string) => void;
+  placeholder: string;
+  listClassName?: string;
+}
+
+const CustomSelect: React.FC<CustomSelectProps> = ({
+  options,
+  value,
+  onChange,
+  placeholder,
+  listClassName = "",
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  const handleToggle = () => setIsOpen(!isOpen);
+  const handleSelect = (val: string) => {
+    onChange(val);
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <div className={styles.customSelectWrapper} ref={wrapperRef}>
+      <div className={styles.customSelectHeader} onClick={handleToggle}>
+        <span>{value || placeholder}</span>
+        <svg className={styles.selectArrow}>
+          <use
+            xlinkHref={
+              isOpen
+                ? "/images/icons.svg#icon-Up-arrow"
+                : "/images/icons.svg#icon-Down-arrow"
+            }
+          />
+        </svg>
+      </div>
+
+      {isOpen && (
+        <ul className={`${styles.customSelectList} ${listClassName}`}>
+          {options.map((opt) => (
+            <li
+              key={opt}
+              className={styles.customSelectItem}
+              onClick={() => handleSelect(opt)}
+            >
+              {opt}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
 
 const FilterComponent: React.FC = () => {
   const { applyFilters, fetchCars, filters, brands, fetchBrandsList } =
@@ -13,17 +82,23 @@ const FilterComponent: React.FC = () => {
     fetchBrandsList();
   }, [fetchBrandsList]);
 
-  const handleFilterChange = (
-    e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
+  const formatMileage = (label: string, value?: number) =>
+    value ? `${label} ${value.toLocaleString()}` : label;
+
+  const handleMileageChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: "mileageFrom" | "mileageTo",
+    label: string
   ) => {
-    const { name, value } = e.target;
-    const finalValue =
-      name === "price" || name.includes("mileage")
-        ? value
-          ? Number(value)
-          : null
-        : value;
-    setLocalFilters((prev) => ({ ...prev, [name]: finalValue }));
+    let raw = e.target.value.replace(new RegExp(label, "i"), "").trim();
+    raw = raw.replace(/,/g, "");
+    const num = raw === "" ? null : Number(raw);
+    if (isNaN(num as number)) return;
+
+    setLocalFilters((prev) => ({
+      ...prev,
+      [field]: num,
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -34,56 +109,53 @@ const FilterComponent: React.FC = () => {
 
   return (
     <form className={styles.filterForm} onSubmit={handleSubmit}>
+      {/* Car Brand */}
       <div className={styles.filterGroup}>
-        <label className={styles.label}>Car Brand</label>
-        <select
-          name="brand"
-          value={localFilters.brand || ""}
-          onChange={handleFilterChange}
-          className={styles.selectInput}
-        >
-          <option value="">All Brands</option>
-          {brands.map((brand) => (
-            <option key={brand} value={brand}>
-              {brand}
-            </option>
-          ))}
-        </select>
+        <label className={styles.label}>Car brand</label>
+        <div className={styles.brandSelect}>
+          <CustomSelect
+            options={brands}
+            value={localFilters.brand}
+            onChange={(val) =>
+              setLocalFilters((prev) => ({ ...prev, brand: val }))
+            }
+            placeholder="Choose a brand"
+            listClassName={styles.brandSelectList}
+          />
+        </div>
       </div>
 
       <div className={styles.filterGroup}>
-        <label className={styles.label}>Price / 1h</label>
-        <select
-          name="price"
-          value={localFilters.price || ""}
-          onChange={handleFilterChange}
-          className={styles.selectInput}
-        >
-          <option value="">Any Price</option>
-          {Array.from({ length: 50 }, (_, i) => (i + 1) * 10).map((price) => (
-            <option key={price} value={price}>
-              {price}$
-            </option>
-          ))}
-        </select>
+        <label className={styles.label}>Price / 1 hour</label>
+        <div className={styles.priceSelect}>
+          <CustomSelect
+            options={Array.from({ length: 50 }, (_, i) =>
+              ((i + 3) * 10).toString()
+            )}
+            value={localFilters.price ? String(localFilters.price) : null}
+            onChange={(val) =>
+              setLocalFilters((prev) => ({ ...prev, price: Number(val) }))
+            }
+            placeholder="Choose a price"
+            listClassName={styles.priceSelectList}
+          />
+        </div>
       </div>
 
       <div className={styles.filterGroup}>
-        <label className={styles.label}>Car Mileage / km</label>
+        <label className={styles.label}>Car mileage / km</label>
         <div className={styles.mileageGroup}>
           <input
-            type="number"
+            type="text"
             name="mileageFrom"
-            placeholder="From"
-            value={localFilters.mileageFrom || ""}
-            onChange={handleFilterChange}
+            value={formatMileage("From", localFilters.mileageFrom ?? undefined)}
+            onChange={(e) => handleMileageChange(e, "mileageFrom", "From")}
           />
           <input
-            type="number"
+            type="text"
             name="mileageTo"
-            placeholder="To"
-            value={localFilters.mileageTo || ""}
-            onChange={handleFilterChange}
+            value={formatMileage("To", localFilters.mileageTo ?? undefined)}
+            onChange={(e) => handleMileageChange(e, "mileageTo", "To")}
           />
         </div>
       </div>

@@ -1,4 +1,4 @@
-/* body {
+ /* body {
   font-family: Arial, sans-serif;
   background-color: #ffffff; 
   color: #101828;
@@ -10,17 +10,17 @@
 .h-48 {
   height: 192px; 
 }
-
+ */
 
 .container {
-  max-width: 1280px; 
+  max-width: 1200px;
+  padding-left: 120px;
+  padding-right: 120px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
-} */
-/* глобально обнуляємо верхні і нижні відступи для h1 та p */
-/* Скидання дефолтних стилів для всього сайту */
+  box-sizing: border-box;
+}
+
 html,
 body {
   margin: 0;

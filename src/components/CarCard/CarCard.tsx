@@ -20,17 +20,31 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
   const favorites = useCarStore((state) => state.favorites);
   const isFavorite = favorites.some((fav) => fav.id === car.id);
 
-  const { brand, model, year, img, rentalPrice, mileage, address } = car;
+  const {
+    brand,
+    model,
+    year,
+    img,
+    rentalPrice,
+    mileage,
+    address,
+    rentalCompany,
+    type,
+  } = car;
 
   return (
     <div className={styles.card}>
       <button
         onClick={() => toggleFavorite(car)}
-        className={`${styles.favoriteButton} ${
-          isFavorite ? "isFavorite" : "notFavorite"
-        }`}
+        className={styles.favoriteButton}
       >
-        {isFavorite ? "❤️" : "🤍"}
+        <svg width="16" height="16">
+          <use
+            href={`/images/icons.svg#${
+              isFavorite ? "icon-Active" : "icon-Default"
+            }`}
+          />
+        </svg>
       </button>
 
       <div className={styles.imageWrapper}>
@@ -45,19 +59,24 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
       <div className={styles.info}>
         <div className={styles.titleLine}>
           <h2 className={styles.title}>
-            {brand} {model}
+            {brand} <span className={styles.model}>{model}</span>, {year}
           </h2>
-          <p className={styles.price}>{rentalPrice}</p>
+          <p className={styles.price}>${rentalPrice}</p>
         </div>
 
-        <div className={styles.details}>
-          <span className={styles.detailItem}>Year: {year}</span>
+        <div className={`${styles.detailsRow} ${styles.detailsRowTop}`}>
           <span className={styles.detailItem}>
-            City: {address.split(",")[0].trim()}
+            {address.split(",")[1].trim()}
           </span>
           <span className={styles.detailItem}>
-            Mileage: {formatMileage(mileage)} km
+            {address.split(",")[2].trim()}
           </span>
+          <span className={styles.detailItem}>{rentalCompany}</span>
+        </div>
+
+        <div className={styles.detailsRow}>
+          <span className={styles.detailItem}>{type}</span>
+          <span className={styles.detailItem}>{formatMileage(mileage)} km</span>
         </div>
 
         <Link href={`/catalog/${car.id}`}>

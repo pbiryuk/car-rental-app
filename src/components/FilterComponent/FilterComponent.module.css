@@ -1,13 +1,11 @@
-/* src/components/FilterComponent/FilterComponent.module.css */
-
 .filterForm {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px; /* Відстань між групами фільтрів */
+  gap: 16px;
   justify-content: center;
-  align-items: flex-end; /* Вирівнювання по кнопці Search */
-  padding: 20px 0;
-  margin-bottom: 50px; /* Відступ перед картками */
+  align-items: flex-end;
+  padding: 0;
+  margin-bottom: 56px;
 }
 
 .filterGroup {
@@ -17,65 +15,175 @@
 }
 
 .label {
-  font-size: 14px;
-  font-weight: 500;
-  color: #8a8a89; /* Сірий, схожий на #8E929A */
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.3333;
+  letter-spacing: 0em;
+  color: #8d929a;
   margin-bottom: 8px;
 }
 
-/* Стилізація SELECT та INPUT */
-.selectInput {
-  height: 48px;
-  min-width: 150px;
-  padding: 14px 18px;
+.customSelectWrapper {
+  position: relative;
+}
+
+.customSelectHeader {
+  padding: 12px 16px;
   border: none;
-  background-color: #f7f7f7; /* Світло-сірий */
-  border-radius: 14px; /* Заокругленість */
-  font-size: 18px;
-  color: #121417; /* Темний текст */
-  appearance: none; /* Приховуємо стандартну стрілку */
+  background-color: #f7f7f7;
+  border-radius: 12px;
+  font-family: Manrope, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0em;
+  color: #101828;
+  appearance: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.brandSelect {
+  width: 204px;
+}
+
+.priceSelect {
+  width: 196px;
+}
+
+.brandSelect .customSelectHeader,
+.priceSelect .customSelectHeader {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.selectArrow {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  fill: #101828;
+  transition: transform 0.2s;
+}
+
+.customSelectList {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+
+  background: #ffffff;
+  border: 1px solid #f7f7f7;
+  border-radius: 12px;
+  box-shadow: 0px 4px 36px rgba(0, 0, 0, 0.02);
+
+  overflow-y: auto;
+  margin: 0;
+  list-style: none;
+  padding: 14px 18px;
+  z-index: 10;
+}
+
+.priceSelectList {
+  max-height: calc(20px * 6 + 8px * 5 + 28px);
+}
+
+.customSelectList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.customSelectList::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0);
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+.customSelectList::-webkit-scrollbar-thumb {
+  background: rgba(218, 221, 225, 1);
+  border-radius: 10px;
+  min-height: 64px;
+  margin: 12px 0;
+}
+.brandSelectList {
+  max-height: 272px;
+}
+
+.customSelectList::-webkit-scrollbar-button {
+  display: none;
+}
+
+.customSelectItem {
+  color: rgba(141, 146, 154, 1);
+  font-family: Manrope, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0em;
+  text-align: left;
+
+  padding-bottom: 8px;
   cursor: pointer;
 }
 
-/* Група пробігу (From/To) */
+.customSelectItem:last-child {
+  padding-bottom: 0;
+}
+
+.customSelectItem:hover,
+.customSelectItem.active {
+  color: rgba(16, 24, 40, 1);
+}
+
 .mileageGroup {
   display: flex;
 }
 
 .mileageGroup input {
-  height: 48px;
-  width: 160px; /* Ширина інпутів пробігу */
-  padding: 14px 18px;
+  width: 112px;
+  padding: 12px 24px;
   border: none;
   background-color: #f7f7f7;
-  font-size: 18px;
-  color: #121417;
+  font-family: Manrope, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0em;
+  color: #101828;
+  outline: none;
 }
 
 .mileageGroup input:first-child {
-  border-top-left-radius: 14px;
-  border-bottom-left-radius: 14px;
-  border-right: 1px solid rgba(138, 138, 137, 0.2); /* Роздільник */
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border-right: 1px solid #dadde1;
 }
 
 .mileageGroup input:last-child {
-  border-top-right-radius: 14px;
-  border-bottom-right-radius: 14px;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
-/* Кнопка Search */
 .searchButton {
-  height: 48px;
-  padding: 0 44px;
-  font-size: 14px;
+  width: 156px;
+  padding: 12px 0;
+  font-family: Manrope, sans-serif;
   font-weight: 600;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: 0em;
   color: #ffffff;
-  background-color: #3470ff; /* Primary Blue */
+  background-color: #3470ff;
+  border: none;
   border-radius: 12px;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
-.searchButton:hover {
-  background-color: #0b44cd; /* Hover Blue */
+.searchButton:hover,
+.searchButton:focus {
+  background-color: #0b44cd;
 }
