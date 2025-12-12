@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import { DayPicker, DateRange } from "react-day-picker";
+import "react-day-picker/dist/style.css";
 import styles from "./CarBookingForm.module.css";
+import "./DayPickerCustom.css";
+import { enUS } from "date-fns/locale";
 
 interface CarBookingFormProps {
   carName: string;
@@ -22,17 +24,40 @@ const CarBookingForm: React.FC<CarBookingFormProps> = ({
     comment: "",
   });
 
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
-    null,
-    null,
-  ]);
-  const [startDate, endDate] = dateRange;
-
+  const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
+  const [hoveredDay, setHoveredDay] = useState<Date | undefined>(undefined);
+  const [isPickerVisible, setIsPickerVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [notification, setNotification] = useState<{
     message: string;
     type: "success" | "error";
   } | null>(null);
+
+  const startDate = dateRange?.from;
+  const endDate = dateRange?.to;
+
+  const togglePicker = () => {
+    const opening = !isPickerVisible;
+    setIsPickerVisible(opening);
+    if (opening) {
+      setDateRange(undefined);
+      setHoveredDay(undefined);
+    }
+  };
+
+  const handleRangeSelect = (range: DateRange | undefined) => {
+    setDateRange(range);
+
+    if (
+      range?.from &&
+      range?.to &&
+      range.from.getTime() !== range.to.getTime()
+    ) {
+      setTimeout(() => {
+        setIsPickerVisible(false);
+      }, 400);
+    }
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -48,23 +73,30 @@ const CarBookingForm: React.FC<CarBookingFormProps> = ({
 
     if (!formData.name || !formData.email || !startDate || !endDate) {
       setNotification({
-        message: "Please fill out all required fields.",
+        message: "Please fill all required fields and select a date range.",
         type: "error",
       });
       setIsSubmitting(false);
       return;
     }
 
+    const minAgeNumber = minAge.replace(/\D/g, "");
+
     setTimeout(() => {
-      setIsSubmitting(false);
       setNotification({
-        message: `Your booking request for ${carName} (Price: ${rentalPrice}, Min Age: ${minAge}) has been sent! We will contact you soon.`,
+        message: `Your booking request for ${carName} (Price: $${rentalPrice}, Min Age: ${minAgeNumber}) has been sent!`,
         type: "success",
       });
       setFormData({ name: "", email: "", comment: "" });
-      setDateRange([null, null]);
+      setDateRange(undefined);
+      setIsSubmitting(false);
     }, 1500);
   };
+
+  const displayDateText =
+    startDate && endDate
+      ? `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`
+      : "Booking date";
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -105,21 +137,49 @@ const CarBookingForm: React.FC<CarBookingFormProps> = ({
         />
       </div>
 
-      <div className={styles.inputGroup}>
-        <DatePicker
-          selectsRange
-          startDate={startDate}
-          endDate={endDate}
-          onChange={(update: [Date | null, Date | null]) =>
-            setDateRange(update)
-          }
-          placeholderText="Booking date"
+      <div className={styles.inputGroup} style={{ position: "relative" }}>
+        <input
+          type="text"
+          value={displayDateText}
+          onClick={togglePicker}
+          readOnly
           disabled={isSubmitting}
           className={styles.datepickerInput}
-          popperPlacement="bottom-end"
-          popperClassName="custom-datepicker-popper"
-          wrapperClassName={styles.datePickerWrapper} // для ширини input
         />
+
+        {isPickerVisible && (
+          <div className={styles.dayPickerContainer}>
+            <DayPicker
+              mode="range"
+              selected={dateRange}
+              onSelect={handleRangeSelect}
+              onDayMouseEnter={setHoveredDay}
+              numberOfMonths={1}
+              weekStartsOn={1}
+              fromDate={new Date()}
+              locale={enUS}
+              formatters={{
+                formatWeekdayName: (day, options) => {
+                  return day.toLocaleDateString(
+                    options?.locale?.code || "en-US",
+                    { weekday: "short" }
+                  );
+                },
+              }}
+              modifiers={{
+                hoverRange: (day) =>
+                  dateRange?.from && !dateRange.to && hoveredDay
+                    ? day >= dateRange.from && day <= hoveredDay
+                    : false,
+              }}
+              modifiersClassNames={{
+                hoverRange: "rdp-day_hoverRange",
+              }}
+              showOutsideDays
+              navLayout="around"
+            />
+          </div>
+        )}
       </div>
 
       <div className={`${styles.inputGroup} ${styles.lastInputGroup}`}>

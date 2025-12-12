@@ -30,7 +30,6 @@
 
 .title {
   max-width: 242px;
-  font-family: "Manrope", sans-serif;
   font-weight: 500;
   font-style: normal;
   font-size: 16px;
@@ -49,7 +48,6 @@
 }
 
 .price {
-  font-family: "Manrope", sans-serif;
   font-weight: 500;
   font-style: normal;
   font-size: 16px;
@@ -62,7 +60,6 @@
 .detailsRow {
   display: flex;
   align-items: center;
-  font-family: "Manrope", sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: 12px;

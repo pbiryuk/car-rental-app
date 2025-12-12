@@ -1,28 +1,28 @@
 .formTitle {
-  font-family: "Manrope", sans-serif;
   font-weight: 600;
   font-size: 20px;
   line-height: 1.2;
-  color: #101828;
+  color: var(--color-text-dark);
   margin: 0 0 8px 0;
 }
 
 .formSubtitle {
-  font-family: "Manrope", sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 1.25;
-  color: #8d929a;
+  color: var(--color-text-gray);
   margin: 0 0 24px 0;
 }
 
 .inputGroup {
   margin-bottom: 16px;
   width: 100%;
+  position: relative;
+  overflow: visible;
 }
 
 .datePickerWrapper {
-  width: 100%; /* робимо ширину інпута 100% */
+  width: 100%;
 }
 
 .inputGroup input,
@@ -30,22 +30,22 @@
 .datepickerInput {
   width: 100%;
   padding: 14px 20px;
-  box-sizing: border-box;
-  background: #f7f7f7;
-  font-family: "Manrope", sans-serif;
+  background: var(--color-bg-light);
   font-weight: 500;
   font-size: 16px;
   line-height: 1.25;
-  color: #8a8a89;
+  color: var(--color-text-gray);
   border: none;
   border-radius: 12px;
+  box-sizing: border-box;
   resize: none;
+  cursor: pointer;
 }
 
 .inputGroup input::placeholder,
 .inputGroup textarea::placeholder,
 .datepickerInput::placeholder {
-  color: #8a8a89;
+  color: var(--color-text-gray);
 }
 
 .lastInputGroup {
@@ -72,7 +72,6 @@
   background-color: #0b44cd;
 }
 
-/* Notification */
 .notification {
   padding: 10px;
   border-radius: 6px;
@@ -88,4 +87,50 @@
 .error {
   background-color: #fee2e2;
   color: #dc2626;
+}
+
+.dayPickerContainer {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+  z-index: 1000;
+  width: 252px;
+  height: 250px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #3470ff;
+  padding: 12px;
+  box-shadow: 0 4px 12px #0000001a;
+}
+
+.dayPickerContainer::after {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid #3470ff;
+  z-index: 1001;
+  filter: none;
+}
+
+.dayPickerContainer::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10.5px solid transparent;
+  border-right: 10.5px solid transparent;
+  border-bottom: 10.5px solid white;
+
+  z-index: 1002;
 }

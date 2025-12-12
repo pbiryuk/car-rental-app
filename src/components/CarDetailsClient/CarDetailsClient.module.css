@@ -1,48 +1,37 @@
-/* Контейнер сторінки */
 .container {
   padding: 104px 120px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Хедер */
 .header {
   display: flex;
-  flex-direction: column; /* щоб рядки були вертикально */
+  flex-direction: column;
   margin-bottom: 68px;
 }
 
 .titleWrapper {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  gap: 16px; /* саме це формує відстань між заголовком та ID */
-  width: fit-content; /* не даємо блоку розтягуватися */
+  gap: 16px;
+  width: fit-content;
 }
 
 .title {
-  font-family: "Manrope", sans-serif;
   font-weight: 600;
-  font-style: normal;
   font-size: 24px;
   line-height: 1.333;
-  letter-spacing: 0em;
-  text-align: left;
-  color: #101828;
+  color: var(--color-text-dark);
   margin: 0 0 8px 0;
 }
 
 .carId {
-  font-family: "Manrope", sans-serif;
   font-weight: 500;
-  font-style: normal;
   font-size: 16px;
   line-height: 1.25;
-  letter-spacing: 0em;
   color: #6c717b;
 }
 
-/* Локація та мильяж під заголовком */
 .locationMileage {
   display: flex;
   align-items: center;
@@ -54,11 +43,10 @@
 .mileage {
   display: flex;
   align-items: center;
-  gap: 4px; /* відстань між іконкою та текстом */
-  font-family: Manrope;
+  gap: 4px;
   font-weight: 500;
   font-size: 16px;
-  color: #101828;
+  color: var(--color-text-dark);
 }
 
 .icon {
@@ -69,39 +57,32 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: Manrope;
   font-size: 16px;
   font-weight: 500;
   color: #6c717b;
 }
+
 .price {
-  color: rgba(52, 112, 255, 1);
-  font-family: Manrope, sans-serif;
+  color: var(--color-primary);
   font-size: 24px;
   font-weight: 600;
   line-height: 1.333;
-  letter-spacing: 0em;
-  text-align: left;
   margin-bottom: 32px;
 }
 
 .descriptionLine {
-  font-family: Manrope, sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 1.333;
-  letter-spacing: 0em;
-  color: #101828;
+  color: var(--color-text-dark);
   margin: 0;
 }
 
-/* Контент сторінки */
 .content {
   display: flex;
   gap: 72px;
 }
 
-/* Ліва колонка: фото, опис, форма бронювання */
 .leftColumn {
   width: 640px;
   display: flex;
@@ -130,86 +111,64 @@
   flex-direction: column;
   justify-content: center;
   padding: 32px;
-  box-sizing: border-box;
-  border: 1px solid rgba(218, 221, 225, 1);
+  border: 1px solid #dadde1;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 1);
+  background: #fff;
 }
 
-/* Права колонка: умови та деталі */
 .rightColumn {
   width: calc(100% - 72px - 640px);
   display: flex;
   flex-direction: column;
 }
 
-/* Секції */
+/* Секции */
 .sectionTitle {
-  font-family: Manrope, sans-serif;
   font-weight: 600;
   font-size: 20px;
   line-height: 1.2;
-  letter-spacing: 0em;
-  color: #101828;
+  color: var(--color-text-dark);
   margin: 0 0 20px 0;
 }
 
-.conditionsList {
-  list-style: none; /* прибираємо стандартні буліти */
-  padding: 0;
-  margin: 0;
-}
-
-.conditionsList li {
-  display: flex;
-  align-items: center;
-  gap: 8px; /* відстань між іконкою і текстом */
-  font-family: "Manrope", sans-serif;
-  font-weight: 500;
-  font-style: medium;
-  font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0;
-  color: #101828;
-  margin-bottom: 16px;
-}
-
-.conditionsList li svg {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  fill: currentColor;
-}
-
+.conditionsList,
 .specificationsList {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
+.conditionsList li,
 .specificationsList li {
   display: flex;
   align-items: center;
-  gap: 8px; /* відстань між SVG і текстом */
-  font-family: Manrope;
+  gap: 8px;
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
-  color: #101828;
+  color: var(--color-text-dark);
   margin-bottom: 16px;
 }
+
+.conditionsList li svg,
+.specificationsList li svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
 .conditionsList li:last-child,
 .specificationsList li:last-child,
 .accessoriesList li:last-child {
   margin-bottom: 0;
 }
+
 .section {
-  /* відстань від попереднього контенту всередині правої колонки */
   display: flex;
   flex-direction: column;
 }
 
-/* Встановлюємо потрібний відступ між секціями */
 .section:not(:last-child) {
   margin-bottom: 110px;
 }

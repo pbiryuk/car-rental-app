@@ -1,11 +1,9 @@
-// src/services/carApi.ts
 import axios from "axios";
 import { Car, Filters, CarApiResponse } from "@/types/car";
 
 const BASE_URL = "https://car-rental-api.goit.global";
 export const CARS_PER_PAGE = 12;
 
-// 👈 НОВИЙ ІНТЕРФЕЙС для уникнення 'any'
 interface CarSearchParams {
   page: string;
   limit: string;
@@ -21,16 +19,12 @@ interface FetchCarsParams {
   filters: Filters;
 }
 
-/**
- * Функція для отримання списку автомобілів з API з підтримкою фільтрації та пагінації.
- */
 export const fetchCarsFromApi = async ({
   page,
   limit,
   filters,
 }: FetchCarsParams): Promise<{ cars: Car[]; hasMore: boolean }> => {
   try {
-    // 👈 ВИКОРИСТАННЯ CarSearchParams
     const params: CarSearchParams = {
       page: page.toString(),
       limit: limit.toString(),
@@ -69,9 +63,6 @@ export const fetchCarsFromApi = async ({
   }
 };
 
-/**
- * Функція для отримання деталей одного автомобіля за ID (/cars/{id})
- */
 export const fetchCarById = async (id: string): Promise<Car> => {
   try {
     const response = await axios.get<Car>(`${BASE_URL}/cars/${id}`);
@@ -92,9 +83,6 @@ export const fetchCarById = async (id: string): Promise<Car> => {
   }
 };
 
-/**
- * Функція для отримання списку доступних брендів (/brands)
- */
 export const fetchBrands = async (): Promise<string[]> => {
   try {
     const response = await axios.get<string[]>(`${BASE_URL}/brands`);

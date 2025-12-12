@@ -10,16 +10,12 @@
   gap: 48px 32px;
   list-style: none;
   padding: 0;
-  margin: 0;
-  margin-bottom: 80px;
+  margin: 0 0 80px 0;
 }
 
 .centerGrid {
-  justify-content: center; /* центрує елементи */
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(276px, auto)
-  ); /* auto замість 1fr */
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(276px, auto));
 }
 
 .loadMoreWrapper {
@@ -61,6 +57,6 @@
   grid-column: 1 / -1;
   text-align: center;
   font-size: 18px;
-  color: #8a8a89;
+  color: var(--color-text-gray);
   margin: 20px 0;
 }

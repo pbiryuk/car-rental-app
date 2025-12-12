@@ -1,9 +1,7 @@
-// src/types/car.ts (ОНОВЛЕНА ВЕРСІЯ)
-
 export interface Car {
-  id: string; // Змінено на string (UUID)
+  id: string;
   year: number;
-  brand: string; // Змінено з 'make' на 'brand'
+  brand: string;
   model: string;
   type: string;
   img: string;
@@ -12,21 +10,20 @@ export interface Car {
   engineSize: string;
   accessories: string[];
   functionalities: string[];
-  rentalPrice: string; // Наприклад, "40" (string)
+  rentalPrice: string;
   rentalCompany: string;
   address: string;
-  rentalConditions: string[]; // Нове поле
+  rentalConditions: string[];
   mileage: number;
 }
 
 export interface Filters {
   brand: string | null;
-  price: number | null; // Максимальна ціна (можливо, string)
+  price: number | null;
   mileageFrom: number | null;
   mileageTo: number | null;
 }
 
-// Інтерфейс для відповіді від API
 export interface CarApiResponse {
   cars: Car[];
   totalCars: number;

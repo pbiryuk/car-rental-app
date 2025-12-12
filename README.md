@@ -1,36 +1,168 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚗 Car Rental App
 
-## Getting Started
+🏠 Головна сторінка
 
-First, run the development server:
+![Home Page](./docs/home.png)
+
+Сучасний веб-додаток для оренди автомобілів, побудований на **Next.js**, **React**, **TypeScript** та **Zustand**.  
+Підтримує каталог авто, фільтри, деталі автомобілів та бронювання.
+
+---
+
+## 🌟 Особливості
+
+- 📋 **Каталог авто**  
+  ![Catalog Page](./docs/catalog.png)  
+  Адаптивна сітка з кнопкою "Load More".
+
+- 🔍 **Фільтри**  
+  ![Filter Component](./docs/filter.png)  
+  За брендом, ціною та пробігом.
+
+- 🚘 **Детальна сторінка авто**  
+  ![Car Details](./docs/details.png)  
+  Опис, характеристики та умови оренди.
+
+- 📝 **Форма бронювання**  
+  ![Booking Form](./docs/booking.png)  
+  Перевірка введених даних.
+
+- 🌐 Підтримка зовнішніх зображень (Unsplash, Cloudinary, API)
+- ⚡ Управління станом через **Zustand**
+- 🎨 Стилізація через **CSS Modules** та глобальні стилі
+
+---
+
+## 🛠 Використані технології
+
+| Категорія       | Технології                |
+| --------------- | ------------------------- |
+| ⚡ Фреймворк    | Next.js                   |
+| ⚛ UI            | React                     |
+| 📝 Типізація    | TypeScript                |
+| 📦 Стан додатку | Zustand                   |
+| 🌐 HTTP клієнт  | Axios                     |
+| 📅 Календар     | React Datepicker          |
+| 🎨 Стилі        | CSS Modules + globals.css |
+| 🔍 Лінтинг      | ESLint + Prettier         |
+
+---
+
+## 📁 Структура проєкту
+
+````text
+car-rental-app/
+├─ public/
+│  └─ images/
+├─ src/
+│  ├─ app/
+│  │  ├─ catalog/
+│  │  │  ├─ [id]/
+│  │  │  │  └─ page.tsx
+│  │  │  ├─ catalog.module.css
+│  │  │  └─ page.tsx
+│  │  ├─ catalog.module.css
+│  │  ├─ globals.css
+│  │  ├─ home.module.css
+│  │  ├─ layout.tsx
+│  │  └─ page.tsx
+│  ├─ components/
+│  │  ├─ CarBookingForm/
+│  │  │  ├─ CarBookingForm.tsx
+│  │  │  └─ CarBookingForm.module.css
+│  │  ├─ CarCard/
+│  │  │  ├─ CarCard.tsx
+│  │  │  └─ CarCard.module.css
+│  │  ├─ CarDetailsClient/
+│  │  │  ├─ CarDetailsClient.tsx
+│  │  │  └─ CarDetailsClient.module.css
+│  │  ├─ FilterComponent/
+│  │  │  ├─ FilterComponent.tsx
+│  │  │  └─ FilterComponent.module.css
+│  │  ├─ Header/
+│  │  │  ├─ Header.tsx
+│  │  │  └─ Header.module.css
+│  │  └─ Loader/
+│  │     ├─ Loader.tsx
+│  │     └─ Loader.module.css
+│  ├─ services/
+│  │  └─ carApi.ts
+│  ├─ store/
+│  │  └─ carStore.ts
+│  └─ types/
+│     └─ car.ts
+├─ .gitignore
+├─ eslint.config.mjs
+├─ next.config.ts
+├─ package.json
+└─ tsconfig.json
+
+## 💻 Установка та запуск
+
+1. Встановлення залежностей:
 
 ```bash
+npm install
+# або
+yarn install
+2. Запуск у режимі розробки:
+
 npm run dev
-# or
+# або
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Відкрийте http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Збірка для продакшн:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+npm run build
+npm start
+# або
+yarn build
+yarn start
 
-## Learn More
+4. Лінтинг коду:
 
-To learn more about Next.js, take a look at the following resources:
+npm run lint
+# або
+yarn lint
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+⚡ Налаштування
+Next.js:
 
-## Deploy on Vercel
+// next.config.ts
+images: {
+  remotePatterns: [
+    { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },
+    { protocol: "https", hostname: "ac.goit.global", pathname: "/**" },
+    { protocol: "https", hostname: "res.cloudinary.com", pathname: "/**" }
+  ]
+}
+TypeScript:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+"baseUrl": "./",
+"paths": { "@/*": ["src/*"] }
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ESLint + Prettier: підтримка Next.js + TypeScript, ігнорує /node_modules, /build, /out, .next, .env*, лог-файли.
+
+🎨 Стилі
+-Використовується шрифт Manrope по всьому додатку
+
+-CSS Modules для компонентів
+
+-Глобальні стилі у globals.css
+
+-Чистий та сучасний UI: кнопки, картки, форми
+
+📌 Git & .gitignore
+Ігнорує:
+
+/node_modules, /build, /out, .next, .env*, лог-файли, *.tsbuildinfo
+
+TypeScript: next-env.d.ts
+
+📌 Автор
+
+[https://github.com/pbiryuk]
+````
